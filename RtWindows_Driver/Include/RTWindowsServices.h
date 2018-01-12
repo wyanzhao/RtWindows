@@ -20,6 +20,7 @@ extern "C" {
 #endif
 	void InitSysytemManager(_SystemManager *lpSystemManager, int bCreate);
 #ifdef _RTWIN32
+	
 	void *GetSystemMem(int nLen);
 
 	_Process *GetNewProcess();
@@ -52,7 +53,6 @@ extern "C" {
 	BOOL SemaphoreReleaseSemaphore(HANDLE hSemaphore, LONG lReleaseCount, LPLONG lpPreviousCount, BOOL bLock);
 	void MsgQueueReleaseAll(HANDLE hHandle);
 
-	void DisplayThreadState(_SystemTable *lpSystemTable, _SystemFunc *lpSystemFunc);
 #endif
 #if defined(__cplusplus)
 }

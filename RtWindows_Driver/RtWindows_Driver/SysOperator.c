@@ -45,9 +45,9 @@ BOOLEAN InitSystemService()
 	if (GetVersion())
 	{
 		//在系统服务表中添加系统调用
-		//AddServices();
+		AddServices();
 		//初始化线程操作方法入口地址
-		//InitThreadOperatorAddress();
+		InitThreadOperatorAddress();
 
 		KeInitializeSpinLock(&dpc_spinlock);
 		KeInitializeDpc(&schedulingDpc, &SchedulDpc, NULL);
@@ -61,5 +61,5 @@ BOOLEAN InitSystemService()
 VOID CleanOutSystem()
 {
 	//恢复ssdt
-	//SetBackServices();
+	SetBackServices();
 }

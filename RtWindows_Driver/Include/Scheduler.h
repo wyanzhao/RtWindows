@@ -31,6 +31,9 @@ extern KSPIN_LOCK dpc_spinlock;
 //Dpc例程处理（调度函数）
 extern KDEFERRED_ROUTINE  SchedulDpc;
 
+//APIC周期
+extern unsigned long apic_period;
+
 /***********************************函数定义***************************************************/
 //初始化调度
 VOID InitScheduler();

@@ -39,9 +39,7 @@ BOOLEAN RtSetThreadAffinity(PETHREAD eThread, ULONG cpuMask)	//64bit下改成ULONG6
 
 	if (*(PULONG)pAffinityThread == s_systemAffinity)
 	{
-		//KdPrint(("Print thread is %d%d%d%d\n",*thread,*(thread+1),*(thread+2),*(thread+3)));
 		*(PULONG)pAffinityThread = cpuMask;
-		//DbgPrint("CurrentThread Mask is %08llx\n", *(PULONG64)pAffinityThread);
 
 		return TRUE;
 	}
@@ -74,7 +72,6 @@ BOOLEAN RtSetProcessAffinity(PEPROCESS eProcess, ULONG  cpuMask)
 	threadList = threadListHead->Flink;
 
 	//遍历线程
-
 	do
 	{
 		//修改AFFINITY域
@@ -82,7 +79,6 @@ BOOLEAN RtSetProcessAffinity(PEPROCESS eProcess, ULONG  cpuMask)
 		RtSetThreadAffinity(curThread, cpuMask);
 		threadList = threadList->Flink;
 	} while (threadList != threadListHead);
-
 
 	return TRUE;
 }

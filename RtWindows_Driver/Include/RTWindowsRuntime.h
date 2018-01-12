@@ -60,6 +60,9 @@ typedef struct
 } _ThreadArgvHead;
 /***********************************º¯Êý¶¨Òå***********************************************/
 #ifdef _RTWIN32
+#if defined(__cplusplus)
+extern "C" {
+#endif
 	__declspec(dllexport) HANDLE RtCreateThread(LPSECURITY_ATTRIBUTES lpThreadAttributes, DWORD dwStackSize, LPTHREAD_START_ROUTINE
 		lpStartAddress, LPVOID lpParameter, DWORD dwCreationFlags, LPDWORD lpThreadId);
 	__declspec(dllexport) HANDLE RtCreateThreadEx(LPSECURITY_ATTRIBUTES lpThreadAttributes, DWORD dwStackSize,
@@ -131,14 +134,13 @@ typedef struct
 
 	__declspec(dllexport) int	SetClockFrequence(int accuracy, int type);
 
-	__declspec(dllexport)  unsigned __int64 timeGetRtTime();
 	__declspec(dllexport) int	 RtPrintf(const char *format, ...);
-	__declspec(dllexport) void   RegisterAPI(char *szlpName, void *api);
 	__declspec(dllexport) BOOL	 RtStartup(BOOL bConsole);
-	__declspec(dllexport) BOOL RtInitializationTime();
 
 	__declspec(dllexport) void * GetSystemMem(int nLen);
 
 	__declspec(dllexport) int    SEHFiler(int code);
-
+#endif
+#if defined(__cplusplus)
+}
 #endif

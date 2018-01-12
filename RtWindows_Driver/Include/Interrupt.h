@@ -53,15 +53,12 @@ typedef struct P2C_IDT_ENTRY_ {
 
 /***********************************系统变量定义***********************************************/
 //apic timer初始计数
-#pragma LOCKEDDATA
 extern unsigned long apic_init_count;
 
 //通过用户态设置的APIC 周期
-#pragma LOCKEDDATA
 extern unsigned long apic_period;
 
 //记录APIC timer原有状态
-#pragma LOCKEDDATA
 extern unsigned long OldInt;
 
 //设置APIC中断计数

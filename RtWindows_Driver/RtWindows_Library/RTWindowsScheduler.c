@@ -6,8 +6,6 @@
 /***********************************系统变量定义***********************************************/
 _SystemManager		s_SystemManager = { 0 };
 _SystemFunc			s_SystemFunc = { 0 };
-_TimeManager			s_TimeManager = { 0 };
-
 /***********************************函数定义***************************************************/
 #pragma LOCKEDCODE
 void SpinLock(_SystemFunc *lpSystemFunc, LONG *SpinLockSection)
@@ -104,6 +102,8 @@ void InitSysytemManager(_SystemManager *lpSystemManager, int bCreate)
 	lpSystemManager->hScheduleEvent = 0;
 	lpSystemManager->bStartup = 0;
 }
+
+#ifdef _RTKERNEL
 
 #pragma LOCKEDCODE
 static void WaitingListInsert(_SystemTable *lpSystemTable, _Thread *lpWaitingThread)
@@ -281,3 +281,4 @@ void RtScheduler(_SystemTable *lpSystemTable, _SystemFunc *lpSystemFunc, SYSTEM_
 		}
 	}
 }
+#endif

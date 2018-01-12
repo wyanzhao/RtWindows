@@ -41,7 +41,6 @@ static ULONG GetNtFunctionAddress(ULONG Index)
 	return *(PULONG)ret;
 }
 
-
 //获得挂起线程的Ps函数入口
 #pragma LOCKEDCODE
 static ULONG GetPsSuspendThreadAddr()
@@ -91,8 +90,8 @@ static ULONG GetKeResumeThreadAddr()
 			b3 = *(i + 2);
 			if (b1 == KeResumeThread_KeyCode1_Win7 && b2 == KeResumeThread_KeyCode2_Win7 && b3 == KeResumeThread_KeyCode3_Win7) //e89316
 			{
-				memcpy(&templong, i + 1, 4);
-				addr = (ULONG)templong + (ULONG)i + 5;
+				memcpy(&templong, i + 4, 4);
+				addr = (ULONG)templong + (ULONG)i + 5 + 3;
 				return addr;
 			}
 		}

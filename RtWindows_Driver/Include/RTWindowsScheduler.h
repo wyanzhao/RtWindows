@@ -35,6 +35,7 @@
 #define MAX_CPU_NUM							1
 #define MAX_PRIORITY_VALUE					256
 
+#ifdef _RTKERNEL
 #ifndef PAGE_OPTION
 #define PAGE_OPTION
 #define PAGEDCODE code_seg("PAGE")
@@ -44,7 +45,19 @@
 #define PAGEDDATA data_seg("PAGE")
 #define LOCKEDDATA data_seg()
 #define INITDATA data_seg("INIT")
-#endif 
+#endif
+#else
+#ifndef PAGE_OPTION
+#define PAGE_OPTION
+#define PAGEDCODE 
+#define LOCKEDCODE 
+#define INITCODE 
+
+#define PAGEDDATA 
+#define LOCKEDDATA 
+#define INITDATA
+#endif // !PAGE_OPTION
+#endif
 
 #define INTERLOCKED_INCREMENT(A)				\
 do {										\
@@ -248,16 +261,9 @@ typedef struct
 	LIST_HEAD					ThreadArgvList;
 } _SystemManager;
 
-typedef struct
-{
-	char *						lpShareMemBase;
-	volatile SYSTEM_TIME_TYPE *lpn64SystemTime;
-} _TimeManager;
-
 /***********************************系统变量定义***********************************************/
 extern _SystemFunc				s_SystemFunc;
 extern _SystemManager s_SystemManager; 
-extern _TimeManager s_TimeManager;
 extern	ULONG			s_AddressOffset;
 
 /***********************************函数定义***************************************************/
@@ -275,6 +281,9 @@ void SpinUnlock(long *SpinLockSection);
 
 #pragma LOCKEDCODE
 void RtScheduler(_SystemTable *lpSystemTable, _SystemFunc *lpSystemFunc, SYSTEM_TIME_TYPE nCurrentTime);
+
+#pragma LOCKEDCODE
+void InitSysytemManager(_SystemManager *lpSystemManager, int bCreate);
 
 #if defined(__cplusplus)
 }

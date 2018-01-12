@@ -8,6 +8,7 @@
 
 /***********************************宏定义**************************************/
 //定义分页、非分页内存
+#ifdef _RTKERNEL
 #ifndef PAGE_OPTION
 #define PAGE_OPTION
 #define PAGEDCODE code_seg("PAGE")
@@ -18,6 +19,18 @@
 #define LOCKEDDATA data_seg()
 #define INITDATA data_seg("INIT")
 #endif // !PAGE_OPTION
+#else
+#ifndef PAGE_OPTION
+#define PAGE_OPTION
+#define PAGEDCODE 
+#define LOCKEDCODE 
+#define INITCODE 
+
+#define PAGEDDATA 
+#define LOCKEDDATA 
+#define INITDATA
+#endif // !PAGE_OPTION
+#endif
 
 #define INIT_LIST_HEAD(ptr) do { \
 		(ptr)->Next = PTR_OFFSET(LIST_HEAD,ptr); (ptr)->Prev = PTR_OFFSET(LIST_HEAD,ptr); \

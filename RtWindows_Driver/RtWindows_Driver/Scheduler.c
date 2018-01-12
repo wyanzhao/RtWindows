@@ -20,8 +20,7 @@ KSPIN_LOCK dpc_spinlock;
 #pragma LOCKEDCODE
 VOID InitScheduler()
 {
-	*s_TimeManager.lpn64SystemTime = *s_TimeManager.lpn64SystemTime + apic_period;
-	//KeInsertQueueDpc(&schedulingDpc, NULL, NULL);
+	KeInsertQueueDpc(&schedulingDpc, NULL, NULL);
 }
 
 #pragma LOCKEDCODE

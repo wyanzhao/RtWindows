@@ -23,7 +23,7 @@ NTSTATUS DriverEntry( IN PDRIVER_OBJECT pDriverObj, IN PUNICODE_STRING pRegistry
 	BOOLEAN                         fSymbolicLink = FALSE;
 	PDEVICE_EXTENSION               pDeviceExten;
 
-	DbgPrint("Enter DriverEntry\n");
+	KdPrint(("Enter DriverEntry\n"));
 	UNREFERENCED_PARAMETER(pRegistryString);
 
 	do
@@ -116,7 +116,7 @@ VOID DriverUnload(IN PDRIVER_OBJECT pDriverObj)
 	UNICODE_STRING    pLinkName;
 	KIRQL					oldIrql;
 
-	DbgPrint("Enter DriverUnload\n");
+	KdPrint(("Enter DriverUnload\n"));
 	KeRaiseIrql(HIGH_LEVEL, &oldIrql);
 	CleanOutSystem();
 	KeLowerIrql(oldIrql);

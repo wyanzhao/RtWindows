@@ -75,15 +75,21 @@ BOOL  SystemInitialization()
 	s_SystemFunc.ResumeThread = _ResumeThread;
 	s_SystemFunc.ReSchedule = 0;
 	
-	//初始化TimeManager
+	//初始化SystemManager
 	s_pBase = (char*)ExAllocatePoolWithTag(NonPagedPool, TIME_MEM_SIZE, 'TIME');
 	if (s_pBase == NULL)return FALSE;
+	KdPrint(("s_pBase = %0x", s_pBase));
+
 	RtlZeroMemory(s_pBase, TIME_MEM_SIZE);
 
-	s_TimeManager.lpShareMemBase = s_pBase;
-	s_AddressOffset = (ULONG)s_TimeManager.lpShareMemBase - 1;
-	s_TimeManager.lpn64SystemTime = (SYSTEM_TIME_TYPE *)s_TimeManager.lpShareMemBase;
-	*s_TimeManager.lpn64SystemTime = 0;
+	s_SystemManager.lpShareMemBase = s_pBase;
+	s_AddressOffset = (ULONG)s_SystemManager.lpShareMemBase - 1;
+	s_SystemManager.lpSystemTable = (_SystemTable *)s_SystemManager.lpShareMemBase;
+	s_SystemManager.lpSystemTable->dwSystemTime = 0;
+	KdPrint(("s_AddressOffset=%0x\n", s_AddressOffset));
+	KdPrint(("lpSystemTable = %0x\n", s_SystemManager.lpSystemTable));
+
+	InitSysytemManager(&s_SystemManager, TRUE);
 
 	return TRUE;
 }

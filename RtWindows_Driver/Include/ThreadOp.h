@@ -19,9 +19,9 @@
 #define PsSuspendThread_KeyCode2_Win7 0x66
 #define PsSuspendThread_KeyCode3_Win7 0x00
 
-#define KeResumeThread_KeyCode1_Win7 0xe8
-#define KeResumeThread_KeyCode2_Win7 0x92
-#define KeResumeThread_KeyCode3_Win7 0x06
+#define KeResumeThread_KeyCode1_Win7 0x8b
+#define KeResumeThread_KeyCode2_Win7 0x45
+#define KeResumeThread_KeyCode3_Win7 0xe4
 
 /***********************************系统数据结构申明区域**************************************/
 typedef struct _THREAD_OPERATE_ADDRESS
